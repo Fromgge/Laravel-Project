@@ -17,16 +17,17 @@
                                            class="col-md-4 col-form-label text-md-end">{{ __('Parent Category') }}</label>
 
                                     <div class="col-md-6">
-                                        <select name="parent" id="parent" class="form-control">
+                                        <select name="parent_id" id="parent" class="form-control @error('parent_id') is-invalid @enderror">
+                                            <option value=""></option>
                                             @foreach($categories as $category)
                                                 <option value="{{$category->id}}">{{$category->name}}</option>
                                             @endforeach
                                         </select>
 
-                                        @error('parent')
+                                        @error('parent_id')
                                         <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                         @enderror
                                     </div>
                                 </div>
