@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <h3 class="text-center">{{ __('Products') }}</h3>
+                {{--                <h3 class="text-center">{{ __('Products') }}</h3>--}}
             </div>
             <div class="col-md-12">
                 @if (session('status'))
@@ -20,7 +20,7 @@
                         <th class="text-center" scope="col">Thumbnail</th>
                         <th class="text-center" scope="col">Name</th>
                         <th class="text-center" scope="col">Quantity</th>
-                        <th class="text-center" scope="col">Category</th>
+                        <th class="text-center" scope="col">Categories</th>
                         <th class="text-center" scope="col">Actions</th>
                     </tr>
                     </thead>
@@ -30,10 +30,8 @@
                             <td class="text-center" scope="col">{{ $product->id }}</td>
                             <td class="text-center" scope="col"><img src="{{ $product->thumbnailUrl }}" width="100" height="100" alt=""></td>
                             <td class="text-center" scope="col">{{ $product->title }}</td>
-                            <td class="text-center" scope="col">{{ $product->in_stock }}</td>
-                            <td class="text-center" scope="col">
-                                @include('categories.parts.category_view', ['category' => $product->category])
-                            </td>
+                            <td class="text-center" scope="col">{{ $product->quantity }}</td>
+                            <td class="text-center" scope="col">@each('categories.parts.category_view', $product->categories, 'category')</td>
                             <td class="text-center" scope="col">
                                 <a href="{{ route('admin.products.edit', $product) }}" class="btn btn-info form-control">Edit</a>
                                 <form action="{{ route('admin.products.destroy', $product) }}" method="POST">
