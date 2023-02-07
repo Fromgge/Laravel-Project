@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-{{--                <h3 class="text-center">{{ __('Products') }}</h3>--}}
+                <h3 class="text-center">{{ __('Products') }}</h3>
             </div>
             <div class="col-md-12">
                 @if (session('status'))
@@ -16,11 +16,12 @@
                 <table class="table align-self-center">
                     <thead>
                     <tr>
-                        <th class="text-center" scope="col">ID</th>
+                        <th class="text-center" scope="col">@sortablelink('id', 'ID')</th>
                         <th class="text-center" scope="col">Thumbnail</th>
-                        <th class="text-center" scope="col">Name</th>
-                        <th class="text-center" scope="col">Quantity</th>
+                        <th class="text-center" scope="col">@sortablelink('title', 'Name')</th>
+                        <th class="text-center" scope="col">@sortablelink('quantity', 'Quantity')</th>
                         <th class="text-center" scope="col">Categories</th>
+                        <th class="text-center" scope="col">@sortablelink('followers_count', 'Followers')</th>
                         <th class="text-center" scope="col">Actions</th>
                     </tr>
                     </thead>
@@ -32,6 +33,7 @@
                             <td class="text-center" scope="col">{{ $product->title }}</td>
                             <td class="text-center" scope="col">{{ $product->quantity }}</td>
                             <td class="text-center" scope="col">@each('categories.parts.category_view', $product->categories, 'category')</td>
+                            <td class="text-center" scope="col">{{ $product->followers_count }}</td>
                             <td class="text-center" scope="col">
                                 <a href="{{ route('admin.products.edit', $product) }}" class="btn btn-info form-control">Edit</a>
                                 <form action="{{ route('admin.products.destroy', $product) }}" method="POST">
@@ -39,7 +41,7 @@
                                     @method('DELETE')
                                     <input type="submit" class="btn btn-danger form-control" value="Remove">
                                 </form>
-                                {{--                                    <a href="{{ route('products.show', $product) }}" class="btn btn-outline-success form-control">View</a>--}}
+                                                                    <a href="{{ route('products.show', $product) }}" class="btn btn-outline-success form-control">View</a>
                             </td>
                         </tr>
                     @endforeach

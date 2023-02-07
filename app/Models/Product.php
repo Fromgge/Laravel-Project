@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Kyslik\ColumnSortable\Sortable;
 
 class Product extends Model
 {
-    use HasFactory;
+    use HasFactory, Sortable;
 
     protected $fillable = [
         'title',
@@ -22,6 +23,14 @@ class Product extends Model
         'SKU',
     ];
 
+    protected $sortableAs = ['followers_count'];
+
+    public $sortable = [
+        'title',
+        'id',
+        'quantity'
+    ];
+
     public function categories()
     {
         return $this->belongsToMany(Category::class);
@@ -30,6 +39,16 @@ class Product extends Model
     public function images()
     {
         return $this->morphMany(Image::class, 'imageable');
+    }
+
+    public function followers()
+    {
+        return $this->belongsToMany(
+            User::class,
+            'wish_list',
+            'product_id',
+            'user_id'
+        );
     }
 
     public function setThumbnailAttribute($image)
@@ -48,8 +67,8 @@ class Product extends Model
     {
         return Attribute::make(
             get: fn() => Storage::exists($this->attributes['thumbnail'])
-                        ? Storage::url($this->attributes['thumbnail'])
-                        : $this->attributes['thumbnail']
+                ? Storage::url($this->attributes['thumbnail'])
+                : $this->attributes['thumbnail']
         );
     }
 
@@ -62,12 +81,12 @@ class Product extends Model
 
     public function endPrice(): Attribute
     {
-        return Attribute::get(function() {
-           $price = is_null($this->attributes['discount']) || $this->attributes['discount'] === 0
-               ? $this->attributes['price']
-               : ($this->attributes['price'] - ($this->attributes['price'] * ($this->attributes['discount'] / 100)));
+        return Attribute::get(function () {
+            $price = is_null($this->attributes['discount']) || $this->attributes['discount'] === 0
+                ? $this->attributes['price']
+                : ($this->attributes['price'] - ($this->attributes['price'] * ($this->attributes['discount'] / 100)));
 
-           return $price < 0 ? 1 : round($price, 2); //  11,5252252 -> 11,52
+            return $price < 0 ? 1 : round($price, 2); //  11,5252252 -> 11,52
         });
     }
 
