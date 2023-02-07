@@ -14,7 +14,6 @@ class Image extends Model
 
     protected $guarded = [];
 
-
     public function imageable()
     {
         return $this->morphTo();
@@ -22,7 +21,10 @@ class Image extends Model
 
     public function setPathAttribute($image)
     {
-        $this->attributes['path'] = FileStorageService::upload($image);
+        $this->attributes['path'] = FileStorageService::upload(
+            $image,
+            $this->attributes['directory'] ?? null
+        );
     }
 
     public function url(): Attribute

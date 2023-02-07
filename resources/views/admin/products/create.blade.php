@@ -119,29 +119,29 @@
                                class="col-md-4 col-form-label text-md-right">{{ __('Thumbnail') }}</label>
                         <div class="col-md-6">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <img src="#" id="thumbnail-preview" alt="">
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <input type="file" name="thumbnail" id="thumbnail">
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    {{--                    <div class="form-group row pt-2">--}}
-                    {{--                        <label for="images" class="col-md-4 col-form-label text-md-right">{{ __('Images') }}</label>--}}
-                    {{--                        <div class="col-md-6">--}}
-                    {{--                            <div class="row">--}}
-                    {{--                                <div class="col-md-12">--}}
-                    {{--                                    <div class="row images-wrapper"></div>--}}
-                    {{--                                </div>--}}
-                    {{--                                <div class="col-md-12">--}}
-                    {{--                                    <input type="file" name="images[]" id="images" multiple>--}}
-                    {{--                                </div>--}}
-                    {{--                            </div>--}}
-                    {{--                        </div>--}}
-                    {{--                    </div>--}}
+                    <div class="form-group row pt-2">
+                        <label for="images" class="col-md-4 col-form-label text-md-right">{{ __('Images') }}</label>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="row images-wrapper"></div>
+                                </div>
+                                <div class="col-md-12">
+                                    <input type="file" name="images[]" id="images" multiple>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="form-group row pt-2">
                         <div class="col-md-10 text-right">
@@ -154,5 +154,5 @@
     </div>
 @endsection
 @push('footer-scripts')
-    {{--    @vite(['resources/js/images-preview.js'])--}}
+    @vite(['resources/js/images-preview.js'])
 @endpush
