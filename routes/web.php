@@ -53,4 +53,10 @@ Route::name('account.')->prefix('account')->middleware(['role:customer'])->group
    Route::get('{user}/edit', [\App\Http\Controllers\Account\UsersController::class, 'edit'])
        ->name('edit')
        ->middleware('can:view,user');
+   Route::get('wishlist', \App\Http\Controllers\Account\WishListController::class)->name('wishlist');
+});
+
+Route::group(['auth'], function() {
+    Route::post('wishlist/{product}', [\App\Http\Controllers\WishListController::class, 'add'])->name('wishlist.add');
+    Route::delete('wishlist/{product}', [\App\Http\Controllers\WishListController::class, 'remove'])->name('wishlist.remove');
 });
