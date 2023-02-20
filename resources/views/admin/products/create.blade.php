@@ -19,126 +19,109 @@
                 @endif
             </div>
             <div class="col-md-12">
-                <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.products.store') }}" class="form-horizontal form-material mx-2"
+                      method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div class="form-group row pt-2">
+                    <div class="form-group column pt-2">
                         <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('Title') }}</label>
-                        <div class="col-md-6">
-                            <input id="title"
-                                   type="text"
-                                   class="form-control @error('title') is-invalid @enderror"
-                                   name="title"
-                                   value="{{ old('title') }}"
-                                   autocomplete="title"
-                                   autofocus
-                            >
-                        </div>
+                        <input id="title"
+                               type="text"
+                               class="form-control @error('title') is-invalid @enderror"
+                               name="title"
+                               value="{{ old('title') }}"
+                               autocomplete="title"
+                               autofocus
+                        >
                     </div>
-                    <div class="form-group row pt-2">
+                    <div class="form-group column pt-2">
                         <label for="category"
                                class="col-md-4 col-form-label text-md-right">{{ __('Categories') }}</label>
-                        <div class="col-md-6">
-                            <select name="categories[]"
-                                    id="categories"
-                                    class="form-control @error('categories') is-invalid @enderror"
-                                    multiple
-                            >
-                                @foreach($categories as $category)
-                                    <option value="{{ $category['id'] }}">{{ $category['name'] }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                        <select name="categories[]"
+                                id="categories"
+                                class="form-control @error('categories') is-invalid @enderror"
+                                multiple
+                        >
+                            @foreach($categories as $category)
+                                <option value="{{ $category['id'] }}">{{ $category['name'] }}</option>
+                            @endforeach
+                        </select>
                     </div>
-                    <div class="form-group row pt-2">
+                    <div class="form-group column pt-2">
                         <label for="SKU" class="col-md-4 col-form-label text-md-right">{{ __('SKU') }}</label>
-                        <div class="col-md-6">
-                            <input id="SKU"
-                                   type="text"
-                                   class="form-control @error('SKU') is-invalid @enderror"
-                                   name="SKU"
-                                   value="{{ old('SKU') }}"
-                                   autocomplete="SKU"
-                                   autofocus
-                            >
-                        </div>
+                        <input id="SKU"
+                               type="text"
+                               class="form-control @error('SKU') is-invalid @enderror"
+                               name="SKU"
+                               value="{{ old('SKU') }}"
+                               autocomplete="SKU"
+                               autofocus
+                        >
                     </div>
-                    <div class="form-group row pt-2">
+                    <div class="form-group column pt-2">
                         <label for="price" class="col-md-4 col-form-label text-md-right">{{ __('Price') }}</label>
-                        <div class="col-md-6">
-                            <input id="price"
-                                   type="text"
-                                   class="form-control @error('price') is-invalid @enderror"
-                                   name="price"
-                                   value="{{ old('price') }}"
-                                   autocomplete="price"
-                                   autofocus
-                            >
-                        </div>
+                        <input id="price"
+                               type="text"
+                               class="form-control @error('price') is-invalid @enderror"
+                               name="price"
+                               value="{{ old('price') }}"
+                               autocomplete="price"
+                               autofocus
+                        >
                     </div>
-                    <div class="form-group row pt-2">
+                    <div class="form-group column pt-2">
                         <label for="discount" class="col-md-4 col-form-label text-md-right">{{ __('Discount') }}</label>
-                        <div class="col-md-6">
-                            <input id="discount"
-                                   type="text"
-                                   class="form-control @error('discount') is-invalid @enderror"
-                                   name="discount"
-                                   value="{{ old('discount') }}"
-                                   autocomplete="discount"
-                                   autofocus
-                            >
-                        </div>
+                        <input id="discount"
+                               type="text"
+                               class="form-control @error('discount') is-invalid @enderror"
+                               name="discount"
+                               value="{{ old('discount') }}"
+                               autocomplete="discount"
+                               autofocus
+                        >
                     </div>
-                    <div class="form-group row pt-2">
+                    <div class="form-group column pt-2">
                         <label for="in_stock"
                                class="col-md-4 col-form-label text-md-right">{{ __('Quantity') }}</label>
-                        <div class="col-md-6">
-                            <input id="in_stock"
-                                   type="number"
-                                   class="form-control @error('quantity') is-invalid @enderror"
-                                   name="quantity"
-                                   value="{{ old('quantity') }}"
-                                   autocomplete="quantity"
-                                   autofocus
-                            >
-                        </div>
+                        <input id="in_stock"
+                               type="number"
+                               class="form-control @error('quantity') is-invalid @enderror"
+                               name="quantity"
+                               value="{{ old('quantity') }}"
+                               autocomplete="quantity"
+                               autofocus
+                        >
                     </div>
-                    <div class="form-group row pt-2">
+                    <div class="form-group column pt-2">
                         <label for="description"
                                class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
-                        <div class="col-md-6">
-                            <textarea name="description"
-                                      class="form-control @error('description') is-invalid @enderror"
-                                      id="description"
-                                      cols="30"
-                                      rows="10">{{ old('description') }}</textarea>
-                        </div>
+                        <textarea name="description"
+                                  class="form-control @error('description') is-invalid @enderror"
+                                  id="description"
+                                  cols="30"
+                                  rows="10">{{ old('description') }}</textarea>
                     </div>
 
-                    <div class="form-group row pt-2">
+                    <div class="form-group column pt-2">
                         <label for="thumbnail"
                                class="col-md-4 col-form-label text-md-right">{{ __('Thumbnail') }}</label>
-                        <div class="col-md-6">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <img src="#" id="thumbnail-preview" alt="">
-                                </div>
-                                <div class="col-md-12">
-                                    <input type="file" name="thumbnail" id="thumbnail">
-                                </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <img src="#" id="thumbnail-preview" alt="">
+                            </div>
+                            <div class="col-md-12">
+                                <input type="file" name="thumbnail" id="thumbnail">
                             </div>
                         </div>
                     </div>
 
-                    <div class="form-group row pt-2">
+                    <div class="form-group column pt-2">
                         <label for="images" class="col-md-4 col-form-label text-md-right">{{ __('Images') }}</label>
-                        <div class="col-md-6">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="row images-wrapper"></div>
-                                </div>
-                                <div class="col-md-12">
-                                    <input type="file" name="images[]" id="images" multiple>
-                                </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row images-wrapper"></div>
+                            </div>
+                            <div class="col-md-12">
+                                <input type="file" name="images[]" id="images" multiple>
                             </div>
                         </div>
                     </div>
