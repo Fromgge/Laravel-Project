@@ -24,6 +24,7 @@ class PermissionsSeeder extends Seeder
         Permission::create(['name' => 'Edit account']);
 
         Permission::create(['name' => 'See admin panel']);
+
         Permission::create(['name' => 'Edit Products']);
         Permission::create(['name' => 'Delete Products']);
         Permission::create(['name' => 'Publish Products']);

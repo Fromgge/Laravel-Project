@@ -127,7 +127,7 @@ return [
      * the default setting is false here for optimum safety.
      */
 
-    'display_role_in_exception' => false,
+    'display_role_in_exception' => true,
 
     /*
      * By default wildcard permission lookups are disabled.
@@ -164,11 +164,11 @@ return [
             'publish' => 'Publish Categories',
             'edit' => 'Edit Categories',
             'delete' => 'Delete Categories',
-    ],
-    'products' => [
-        'publish' => 'Publish Products',
-        'edit' => 'Edit Products',
-        'delete' => 'Delete Products',
+        ],
+        'products' => [
+            'publish' => 'Publish Products',
+            'edit' => 'Edit Products',
+            'delete' => 'Delete Products',
         ]
     ]
 ];

@@ -57,7 +57,7 @@ class CategoriesControllerTest extends TestCase
         $response->assertStatus(302);
         $response->assertRedirectToRoute('admin.categories.index');
         $this->assertDatabaseHas('categories', [
-            'name' => $data['name']
+           'name' => $data['name']
         ]);
     }
 

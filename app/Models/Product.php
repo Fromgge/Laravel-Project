@@ -48,8 +48,8 @@ class Product extends Model
     {
         return Attribute::make(
             get: fn() => Storage::exists($this->attributes['thumbnail'])
-                ? Storage::url($this->attributes['thumbnail'])
-                : $this->attributes['thumbnail']
+                        ? Storage::url($this->attributes['thumbnail'])
+                        : $this->attributes['thumbnail']
         );
     }
 
@@ -58,5 +58,26 @@ class Product extends Model
         return Attribute::make(
             get: fn() => strtolower(str_replace(' ', '_', $this->attributes['title']))
         );
+    }
+
+    public function endPrice(): Attribute
+    {
+        return Attribute::get(function() {
+           $price = is_null($this->attributes['discount']) || $this->attributes['discount'] === 0
+               ? $this->attributes['price']
+               : ($this->attributes['price'] - ($this->attributes['price'] * ($this->attributes['discount'] / 100)));
+
+           return $price < 0 ? 1 : round($price, 2); //  11,5252252 -> 11,52
+        });
+    }
+
+    public function price(): Attribute
+    {
+        return Attribute::get(fn() => round($this->attributes['price'], 2));
+    }
+
+    public function available(): Attribute
+    {
+        return Attribute::get(fn() => $this->attributes['quantity'] > 0);
     }
 }

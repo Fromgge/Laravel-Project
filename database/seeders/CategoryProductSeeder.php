@@ -15,9 +15,9 @@ class CategoryProductSeeder extends Seeder
      */
     public function run()
     {
-//        \DB::table('category_product')->truncate();
-//        \DB::table('products')->truncate();
-//        \DB::table('categories')->truncate();
+        \DB::table('category_product')->truncate();
+        \DB::table('products')->truncate();
+        \DB::table('categories')->truncate();
 
         Category::factory(5)->create()->each(function($category) {
             $this->addProductsToCategory($category);
