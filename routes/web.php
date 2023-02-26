@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Events\OrderCreated;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,20 @@ use Illuminate\Support\Facades\Route;
 //});
 
 Auth::routes();
+
+Route::get('/invoice', function() {
+    dump('start');
+    $order = \App\Models\Order::all()->last();
+    $invoiceService = new \App\Services\InvoicesService();
+    $invoice = $invoiceService->generate($order);
+    echo $invoice->url();
+});
+
+Route::get('/notify', function() {
+    dump('start');
+    $order = \App\Models\Order::all()->last();
+    OrderCreated::dispatch($order);
+});
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
