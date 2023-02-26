@@ -59,4 +59,11 @@ Route::name('account.')->prefix('account')->middleware(['role:customer'])->group
 Route::group(['auth'], function() {
     Route::post('wishlist/{product}', [\App\Http\Controllers\WishListController::class, 'add'])->name('wishlist.add');
     Route::delete('wishlist/{product}', [\App\Http\Controllers\WishListController::class, 'remove'])->name('wishlist.remove');
+    Route::get('checkout', \App\Http\Controllers\CheckoutController::class)->name('checkout');
+
+    Route::prefix('paypal')->name('paypal.')->group(function(){
+        Route::post('order/create', [\App\Http\Controllers\Payments\PaypalController::class, 'create'])->name('orders.create');
+        Route::post('order/{orderId}/capture', [\App\Http\Controllers\Payments\PaypalController::class, 'capture'])->name('orders.capture');
+        Route::get('order/{orderId}/thankYou', [\App\Http\Controllers\Payments\PaypalController::class, 'thankYou'])->name('orders.thankYou');
+    });
 });
