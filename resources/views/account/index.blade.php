@@ -9,9 +9,9 @@
                 <h3 class="text-center">{{ __('My Account ('. $user->fullName . ')') }}</h3>
                 <br>
             </div>
-{{--            @empty($user->telegram_id)--}}
-{{--                @include('account.parts.telegram')--}}
-{{--            @endempty--}}
+            @empty($user->telegram_id)
+                @include('account.parts.telegram')
+            @endempty
             <div class="col-md-12">
                 <div class="album py-5 bg-light">
                     <div class="container">
@@ -45,10 +45,10 @@
                                         <td scope="row" class="text-center">{{__('Birthday')}}</td>
                                         <td class="text-center"> {{ $user->birthdate }} </td>
                                     </tr>
-{{--                                    <tr>--}}
-{{--                                        <td scope="row" class="text-center">{{__('Telegram ID')}}</td>--}}
-{{--                                        <td class="text-center"> {{ $user->telegram_id }} </td>--}}
-{{--                                    </tr>--}}
+                                    <tr>
+                                        <td scope="row" class="text-center">{{__('Telegram ID')}}</td>
+                                        <td class="text-center"> {{ $user->telegram_id }} </td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>
