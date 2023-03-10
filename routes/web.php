@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Events\OrderCreated;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,13 +25,18 @@ Route::get('/invoice', function() {
     $order = \App\Models\Order::all()->last();
     $invoiceService = new \App\Services\InvoicesService();
     $invoice = $invoiceService->generate($order);
-    echo $invoice->url();
+    dump($order->total);
+    dump($invoice->url());
+    dump(Storage::disk('public')->path($invoice->filename));
+    dump('finish');
 });
 
 Route::get('/notify', function() {
-    dump('start');
+    logs()->info('start');
+//    dd(route('account.wishlist'));
     $order = \App\Models\Order::all()->last();
     OrderCreated::dispatch($order);
+    logs()->info('finish');
 });
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -40,10 +45,10 @@ Route::resource('products', \App\Http\Controllers\ProductsController::class)->on
 Route::resource('categories', \App\Http\Controllers\CategoriesController::class)->only(['index', 'show']);
 
 Route::name('cart.')->prefix('cart')->group(function() {
-   Route::get('/', [\App\Http\Controllers\CartController::class, 'index'])->name('index');
-   Route::post('{product}', [\App\Http\Controllers\CartController::class, 'add'])->name('add');
-   Route::delete('/', [\App\Http\Controllers\CartController::class, 'remove'])->name('remove');
-   Route::post('{product}/count', [\App\Http\Controllers\CartController::class, 'countUpdate'])->name('count.update');
+    Route::get('/', [\App\Http\Controllers\CartController::class, 'index'])->name('index');
+    Route::post('{product}', [\App\Http\Controllers\CartController::class, 'add'])->name('add');
+    Route::delete('/', [\App\Http\Controllers\CartController::class, 'remove'])->name('remove');
+    Route::post('{product}/count', [\App\Http\Controllers\CartController::class, 'countUpdate'])->name('count.update');
 });
 
 // localhost/admin/....
@@ -64,11 +69,12 @@ Route::name('ajax.')->middleware('auth')->prefix('ajax')->group(function() {
 });
 
 Route::name('account.')->prefix('account')->middleware(['role:customer'])->group(function() {
-   Route::get('/', [\App\Http\Controllers\Account\UsersController::class, 'index'])->name('index');
-   Route::get('{user}/edit', [\App\Http\Controllers\Account\UsersController::class, 'edit'])
-       ->name('edit')
-       ->middleware('can:view,user');
-   Route::get('wishlist', \App\Http\Controllers\Account\WishListController::class)->name('wishlist');
+    Route::get('/', [\App\Http\Controllers\Account\UsersController::class, 'index'])->name('index');
+    Route::get('{user}/edit', [\App\Http\Controllers\Account\UsersController::class, 'edit'])
+        ->name('edit')
+        ->middleware('can:view,user');
+    Route::get('wishlist', \App\Http\Controllers\Account\WishListController::class)->name('wishlist');
+    Route::get('telegram/callback', \App\Http\Controllers\TelegramCallbackController::class)->name('telegram.callback');
 });
 
 Route::group(['auth'], function() {
@@ -76,7 +82,7 @@ Route::group(['auth'], function() {
     Route::delete('wishlist/{product}', [\App\Http\Controllers\WishListController::class, 'remove'])->name('wishlist.remove');
     Route::get('checkout', \App\Http\Controllers\CheckoutController::class)->name('checkout');
 
-    Route::prefix('paypal')->name('paypal.')->group(function(){
+    Route::prefix('paypal')->name('paypal.')->group(function() {
         Route::post('order/create', [\App\Http\Controllers\Payments\PaypalController::class, 'create'])->name('orders.create');
         Route::post('order/{orderId}/capture', [\App\Http\Controllers\Payments\PaypalController::class, 'capture'])->name('orders.capture');
         Route::get('order/{orderId}/thankYou', [\App\Http\Controllers\Payments\PaypalController::class, 'thankYou'])->name('orders.thankYou');
