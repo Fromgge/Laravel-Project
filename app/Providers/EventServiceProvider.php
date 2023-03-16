@@ -26,8 +26,8 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         OrderCreated::class => [
-            CreatedListener::class
-        ]
+            CreatedListener::class,
+        ],
     ];
 
     protected $observers = [
@@ -36,7 +36,7 @@ class EventServiceProvider extends ServiceProvider
     ];
 
     protected $subscribe = [
-        UserEventListener::class
+        UserEventListener::class,
     ];
 
     /**

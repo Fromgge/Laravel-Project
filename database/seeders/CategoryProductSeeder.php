@@ -19,7 +19,7 @@ class CategoryProductSeeder extends Seeder
         \DB::table('products')->truncate();
         \DB::table('categories')->truncate();
 
-        Category::factory(5)->create()->each(function($category) {
+        Category::factory(5)->create()->each(function ($category) {
             $this->addProductsToCategory($category);
             if (rand(0, 1)) {
                 $subCategories = Category::factory(rand(1, 3))->make();

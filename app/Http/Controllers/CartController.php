@@ -42,6 +42,7 @@ class CartController extends Controller
         $requestedCount = $request->get('product_count');
         if ($product->quantity < $requestedCount) {
             notify()->error("Max count of current product is {$product->quantity}", position: 'topRight');
+
             return redirect()->back();
         }
 
@@ -50,6 +51,7 @@ class CartController extends Controller
         Cart::instance('cart')->update($rowId, $requestedCount);
 
         notify()->success('Product count was updated', position: 'topRight');
+
         return redirect()->back();
     }
 
@@ -57,8 +59,9 @@ class CartController extends Controller
     {
         $rowId = $request->get('rowId');
 
-        if (!$rowId) {
+        if (! $rowId) {
             notify()->error('Oops smth went wrong', position: 'topRight');
+
             return redirect()->back();
         }
 

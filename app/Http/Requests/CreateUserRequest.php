@@ -30,7 +30,7 @@ class CreateUserRequest extends FormRequest
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'phone' => ['required', 'string', 'max:15', 'unique:users'],
             'birthdate' => ['required', 'date', 'before_or_equal:-18 years'],
-            'password' => ['required', 'confirmed', Password::default()]
+            'password' => ['required', 'confirmed', Password::default()],
         ];
     }
 }

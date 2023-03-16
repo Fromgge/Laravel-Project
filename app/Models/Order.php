@@ -13,16 +13,16 @@ class Order extends Model
     use HasFactory, Notifiable;
 
     protected $fillable = [
-        "status_id",
-        "user_id",
-        "name",
-        "surname",
-        "phone",
-        "email",
-        "city",
-        "address",
-        "total",
-        "vendor_order_id"
+        'status_id',
+        'user_id',
+        'name',
+        'surname',
+        'phone',
+        'email',
+        'city',
+        'address',
+        'total',
+        'vendor_order_id',
     ];
 
     public function status()
@@ -47,11 +47,11 @@ class Order extends Model
 
     public function inProcess(): Attribute
     {
-        return Attribute::get(fn() => $this->status->name === OrderStatusesEnum::InProcess->value);
+        return Attribute::get(fn () => $this->status->name === OrderStatusesEnum::InProcess->value);
     }
 
     public function fullName(): Attribute
     {
-        return Attribute::get(fn() => ucfirst($this->attributes['name']) . ' ' . ucfirst($this->attributes['surname']));
+        return Attribute::get(fn () => ucfirst($this->attributes['name']).' '.ucfirst($this->attributes['surname']));
     }
 }

@@ -34,7 +34,7 @@ class PaypalService implements PaypalServiceContract
                 $request->validated(),
                 [
                     'vendor_order_id' => $paypalOrder['id'],
-                    'total' => $total
+                    'total' => $total,
                 ]
             );
             $order = $repository->create($request);
@@ -44,6 +44,7 @@ class PaypalService implements PaypalServiceContract
             return response()->json($order);
         } catch (\Exception $exception) {
             DB::rollBack();
+
             return $this->errorHandler($exception);
         }
     }
@@ -68,6 +69,7 @@ class PaypalService implements PaypalServiceContract
             return response()->json($result);
         } catch (\Exception $exception) {
             DB::rollBack();
+
             return $this->errorHandler($exception);
         }
     }
@@ -80,16 +82,17 @@ class PaypalService implements PaypalServiceContract
                 [
                     'amount' => [
                         'currency_code' => config('paypal.currency'),
-                        'value' => $total
-                    ]
-                ]
-            ]
+                        'value' => $total,
+                    ],
+                ],
+            ],
         ]);
     }
 
     protected function errorHandler(\Exception $exception)
     {
         logs()->warning($exception);
+
         return response()->json(['error' => $exception->getMessage()], 422);
     }
 }

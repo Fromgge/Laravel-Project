@@ -26,7 +26,7 @@ class CreateCategory extends FormRequest
         return [
             'name' => ['required', 'string', 'min:2', 'max:50', 'unique:categories'],
             'description' => ['nullable', 'string'],
-            'parent_id' => ['nullable', 'exists:App\Models\Category,id']
+            'parent_id' => ['nullable', 'exists:App\Models\Category,id'],
         ];
     }
 }

@@ -10,7 +10,7 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 class OrderRepository implements Contracts\OrderRepositoryContract
 {
     const ORDER_STATUSES = [
-        'completed' => 'COMPLETED'
+        'completed' => 'COMPLETED',
     ];
 
     public function create(array $request): Order|bool
@@ -27,11 +27,11 @@ class OrderRepository implements Contracts\OrderRepositoryContract
     public function setTransaction(string $vendorOrderId, TransactionAdapter $adapter): Order
     {
         $order = Order::where('vendor_order_id', $vendorOrderId)->firstOrFail();
-        $order->transaction()->create((array)$adapter);
+        $order->transaction()->create((array) $adapter);
 
         if ($adapter->status === self::ORDER_STATUSES['completed']) {
             $order->update([
-                'status_id' => OrderStatus::paid()->firstOrFail()?->id
+                'status_id' => OrderStatus::paid()->firstOrFail()?->id,
             ]);
         }
 
@@ -44,12 +44,12 @@ class OrderRepository implements Contracts\OrderRepositoryContract
             $cartItem = $item->first();
             $order->products()->attach($cartItem->model, [
                 'quantity' => $cartItem->qty,
-                'single_price' => $cartItem->price
+                'single_price' => $cartItem->price,
             ]);
 
             $quantity = $cartItem->model->quantity - $cartItem->qty;
 
-            if (!$cartItem->model->update(compact('quantity'))) {
+            if (! $cartItem->model->update(compact('quantity'))) {
                 throw new \Exception("Smth went wrong with product (id: {$cartItem->model->id}) quantity update");
             }
         });

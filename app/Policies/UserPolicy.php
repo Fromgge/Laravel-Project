@@ -6,7 +6,6 @@ use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response;
 
-
 class UserPolicy
 {
     use HandlesAuthorization;
@@ -14,8 +13,6 @@ class UserPolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
      * @return Response
      */
     public function view(User $user, User $model)
@@ -28,8 +25,6 @@ class UserPolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function update(User $user, User $model)

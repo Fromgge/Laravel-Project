@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 class WishListController extends Controller
@@ -14,6 +13,7 @@ class WishListController extends Controller
         Cart::instance('wishlist')->add($product->id, $product->title, 1, $product->endPrice)->associate($product);
 
         notify()->success('Product was added to wish list', position: 'topRight');
+
         return redirect()->back();
     }
 
