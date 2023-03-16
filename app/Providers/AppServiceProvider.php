@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Notifications\OrderCreatedNotification;
 use App\Repositories\Contracts\ImageRepositoryContract;
 use App\Repositories\Contracts\OrderRepositoryContract;
 use App\Repositories\Contracts\ProductRepositoryContract;
@@ -23,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
         ImageRepositoryContract::class => ImageRepository::class,
         OrderRepositoryContract::class => OrderRepository::class,
         PaypalServiceContract::class => PaypalService::class,
-        InvoicesServiceContract::class => InvoicesService::class
+        InvoicesServiceContract::class => InvoicesService::class,
     ];
 
     /**

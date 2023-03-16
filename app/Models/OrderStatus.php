@@ -32,6 +32,7 @@ class OrderStatus extends Model
     {
         return $this->statusQuery($query, OrderStatusesEnum::Canceled);
     }
+
     public function scopeCompleted(Builder $query)
     {
         return $this->statusQuery($query, OrderStatusesEnum::Completed);

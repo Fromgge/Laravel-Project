@@ -9,7 +9,9 @@ use App\Repositories\Contracts\ProductRepositoryContract;
 
 class ProductRepository implements ProductRepositoryContract
 {
-    public function __construct(protected ImageRepositoryContract $imagesRepository) {}
+    public function __construct(protected ImageRepositoryContract $imagesRepository)
+    {
+    }
 
     public function create(CreateProductRequest $request): Product|bool
     {
@@ -40,7 +42,7 @@ class ProductRepository implements ProductRepositoryContract
 
     public function setCategories(Product $product, array $categories = []): void
     {
-        if (!empty($categories)) {
+        if (! empty($categories)) {
             $product->categories()->attach($categories);
         }
     }

@@ -32,7 +32,7 @@ class CreateProductRequest extends FormRequest
             'quantity' => ['required', 'numeric', 'min:0'],
             'categories.*' => ['required', 'numeric', 'exists:App\Models\Category,id'],
             'thumbnail' => ['required', 'image:jpeg,png'],
-            'images.*' => ['image:jpeg,png']
+            'images.*' => ['image:jpeg,png'],
         ];
     }
 }

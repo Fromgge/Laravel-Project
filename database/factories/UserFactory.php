@@ -6,7 +6,6 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use Spatie\Permission\Models\Role;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -34,7 +33,7 @@ class UserFactory extends Factory
 
     public function configure()
     {
-        return $this->afterCreating(function(User $user) {
+        return $this->afterCreating(function (User $user) {
             $user->assignRole('customer');
         });
     }
@@ -54,9 +53,9 @@ class UserFactory extends Factory
     public function withEmail(string $email)
     {
         return $this->state(function (array $attrs) use ($email) {
-           return [
-               'email' => $email
-           ];
+            return [
+                'email' => $email,
+            ];
         });
     }
 }

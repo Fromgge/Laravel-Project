@@ -9,16 +9,15 @@ use Illuminate\Support\Str;
 
 class FileStorageService implements Contracts\FileStorageServiceContract
 {
-
     public static function upload(string|UploadedFile $file, string $additionPath = ''): string
     {
         if (is_string($file)) {
             return str_replace('public/storage', '', $file);
         }
 
-        $additionPath = !empty($additionPath) ? $additionPath . '/' : $additionPath;
+        $additionPath = ! empty($additionPath) ? $additionPath.'/' : $additionPath;
 
-        $filePath = "public/{$additionPath}" . static::randName() . '.' . $file->getClientOriginalExtension();
+        $filePath = "public/{$additionPath}".static::randName().'.'.$file->getClientOriginalExtension();
         Storage::put($filePath, File::get($file));
         Storage::setVisibility($filePath, 'public');
 
@@ -32,6 +31,6 @@ class FileStorageService implements Contracts\FileStorageServiceContract
 
     protected static function randName(): string
     {
-        return Str::random() . '_' . time();
+        return Str::random().'_'.time();
     }
 }

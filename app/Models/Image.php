@@ -30,7 +30,7 @@ class Image extends Model
     public function url(): Attribute
     {
         return Attribute::make(
-            get: fn() => Storage::exists($this->attributes['path'])
+            get: fn () => Storage::exists($this->attributes['path'])
                 ? Storage::url($this->attributes['path'])
                 : $this->attributes['path']
         );

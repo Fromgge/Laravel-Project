@@ -21,12 +21,13 @@
         "predis/predis": "^2.1",
         "pschocke/laravel-telegram-login-widget": "^2.0",
         "spatie/laravel-permission": "^5.7",
-        "srmklive/paypal": "~3.0"
+        "srmklive/paypal": "~3.0",
+        "willvincent/laravel-rateable": "^3.1"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.12",
         "fakerphp/faker": "^1.9.1",
-        "laravel/pint": "^1.0",
+        "laravel/pint": "^1.6",
         "laravel/sail": "^1.17",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.1",

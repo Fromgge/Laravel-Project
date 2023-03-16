@@ -35,7 +35,7 @@ class CreateOrderRequest extends FormRequest
 
     public function all($keys = null)
     {
-        if(empty($keys)){
+        if (empty($keys)) {
             return parent::json()->all();
         }
 

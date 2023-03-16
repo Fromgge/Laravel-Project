@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Ajax;
 
 use App\Http\Controllers\Controller;
 use App\Models\Image;
-use Illuminate\Http\Request;
 use PHPUnit\Exception;
 
 class RemoveImageController extends Controller

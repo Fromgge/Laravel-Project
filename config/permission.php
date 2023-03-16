@@ -169,6 +169,6 @@ return [
             'publish' => 'Publish Products',
             'edit' => 'Edit Products',
             'delete' => 'Delete Products',
-        ]
-    ]
+        ],
+    ],
 ];
