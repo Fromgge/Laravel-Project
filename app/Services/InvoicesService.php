@@ -9,7 +9,7 @@ use LaravelDaily\Invoices\Classes\InvoiceItem;
 use LaravelDaily\Invoices\Invoice;
 use LaravelDaily\Invoices\Facades\Invoice as InvoiceBuilder;
 
-class InvoicesService implements Contracts\InvoicesServiceContact
+class InvoicesService implements Contracts\InvoicesServiceContract
 {
 
     public function generate(Order $order): Invoice
